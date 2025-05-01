@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Synthesizer</title>
+  <script>
+    function fetchInputs() {
+      fetch('/selections')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('instrument').textContent = data.instrument || "...";
+          document.getElementById('mood').textContent = data.mood || "...";
+          document.getElementById('genre').textContent = data.genre || "...";
+        });
+    }
+
+    setInterval(fetchInputs, 1000);
+  </script>
+</head>
+<body>
+  <h1>🎶 Music Synthesizer UI</h1>
+  <h3>Selected Inputs (from Arduino Keypad):</h3>
+  <p>🎸 Instrument: <span id="instrument">...</span></p>
+  <p>😊 Mood: <span id="mood">...</span></p>
+  <p>🎵 Genre: <span id="genre">...</span></p>
+
+  <h3>🎧 Output</h3>
+  <audio controls>
+    <source src="/static/generated_music.wav" type="audio/wav">
+    Your browser does not support audio playback.
+  </audio>
+</body>
+</html>
